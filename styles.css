@@ -101,6 +101,7 @@ body {
     height: 18em;
     margin: 0em .5em;
 }
+
 .bookmark-inner-container {
     overflow-y: scroll;
     height: 80%;
@@ -134,4 +135,31 @@ body {
 .scroll4::-webkit-scrollbar-track {
   background: #272727;
   border-radius: 20px;
+}
+
+.bookmark-tile {
+    padding: 1em;
+    background-color: #272727;
+    border-radius: 3px;
+    font-family: "Roboto Mono";
+    font-size: .85rem;
+    width: 12em;
+    /* height: 18em; */
+    color:#fff;
+    margin: 0em .5em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 1em;
+}
+
+.tile-icon {
+    height:3em;
+    margin-right: 1em;
+}
+
+.tile-container {
+    display: flex;
+    flex-direction: row;
 }

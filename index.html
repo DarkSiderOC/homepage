@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
+
     <title>Home</title>
     <link rel="stylesheet" href="styles.css">
     <link href="favicon.png" rel="shortcut icon" type="image/x-icon" />
     <script type="text/javascript" src="config.js"></script>
 </head>
+
 <body>
     <div id="search">
-        <input id="search-field" type="text" name="search-field" onkeypress="return search(event)"/>
+        <input id="search-field" type="text" name="search-field" onkeypress="return search(event)" />
     </div>
     <div class="container">
         <div id="clock"></div>
         <div class="weather-container">
             <div class="row">
-                <div id="weather-description"class="inline"></div>
+                <div id="weather-description" class="inline"></div>
                 <div class="inline">-</div>
                 <div id="temp" class="inline"></div>
             </div>
@@ -30,6 +32,7 @@
                     <a class="bookmark" href="https://inbox.google.com/" target="_self">Inbox</a>
                     <a class="bookmark" href="https://github.com/" target="_self">Github</a>
                     <a class="bookmark" href="https://drive.google.com/" target="_self">Drive</a>
+                    <a class="bookmark" href="https://calendar.google.com/calendar/r" target="_self">Calendar</a>
                 </div>
             </div>
             <div class="bookmark-set">
@@ -37,11 +40,10 @@
                 <div class="bookmark-inner-container scroll4">
                     <a class="bookmark" href="https://youtube.com" target="_self">Youtube</a>
                     <a class="bookmark" href="https://netflix.com" target="_self">Netflix</a>
-                    <a class="bookmark" href="https://crunchyroll.com" target="_self">Crunchyroll</a>
                 </div>
             </div>
-            <div class="bookmark-set">
-            <div class="bookmark-title">Reddit</div>
+            <!-- <div class="bookmark-set">
+                <div class="bookmark-title">Reddit</div>
                 <div class="bookmark-inner-container scroll4">
                     <a class="bookmark" href="https://reddit.com/r/overwatch" target="_self">/r/overwatch</a>
                     <a class="bookmark" href="https://reddit.com/r/pcmasterrace" target="_self">/r/pcmasterrace</a>
@@ -50,13 +52,48 @@
                     <a class="bookmark" href="https://reddit.com/r/unixporn" target="_self">/r/unixporn</a>
                     <a class="bookmark" href="https://reddit.com/r/news" target="_self">/r/news</a>
                 </div>
-            </div>
+            </div> -->
             <div class="bookmark-set">
                 <div class="bookmark-title">Social</div>
                 <div class="bookmark-inner-container scroll4">
                     <a class="bookmark" href="https://hckrnews.com" target="_self">Hacker News</a>
                 </div>
             </div>
+            <div class="bookmark-set">
+                <div class="bookmark-title">Helsinki</div>
+                <div class="bookmark-inner-container scroll4">
+                    <a class="bookmark" href="http://student.helsinki.fi" target="_self">Career</a>
+                    <a class="bookmark" href="https://moodle.helsinki.fi/course/view.php?id=34080" target="_self">Big
+                        Data</a>
+                    <a class="bookmark" href="https://moodle.helsinki.fi/course/view.php?id=35446"
+                        target="_self">IoT</a>
+                    <a class="bookmark" href="https://wiki.helsinki.fi/display/CV/Computer+Vision+course+fall+2019"
+                        target="_self">Computer Vision</a>
+                    <a class="bookmark" href="http://moodle.helsinki.fi" target="_self">Moodle</a>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="tile-container">
+            <a href="https://www.youtube.com/   ">
+                <div class="bookmark-tile">
+                    <img class="tile-icon" src="./youtube.png" />
+                    YouTube
+                </div>
+            </a>
+            <a href="https://www.netflix.com/browse">
+                <div class="bookmark-tile">
+                    <img class="tile-icon" style="height:3em;" src="./netflix.png" />
+                    Netflix
+                </div>
+            </a>
+            <a href="https://www.reddit.com">
+                <div class="bookmark-tile">
+                    <img class="tile-icon" style="height:3em;" src="./reddit.png" />
+                    Reddit
+                </div>
+            </a>
         </div>
     </div>
 
@@ -75,18 +112,18 @@
             let date = new Date(),
                 min = date.getMinutes(),
                 sec = date.getSeconds(),
-                hour = date.getHours();
+                hour = date.getHours() + 1;
 
-            return "" + 
-                (hour < 10 ? ("0" + hour) : hour) + ":" + 
-                (min < 10 ? ("0" + min) : min) + ":" + 
+            return "" +
+                (hour < 10 ? ("0" + hour) : hour) + ":" +
+                (min < 10 ? ("0" + min) : min) + ":" +
                 (sec < 10 ? ("0" + sec) : sec);
         }
 
         window.onload = () => {
             let xhr = new XMLHttpRequest();
             // Request to open weather map
-            xhr.open('GET', 'http://api.openweathermap.org/data/2.5/weather?id='+ config.cityCode + '&units=' + config.tempMetric + '&appid=e5b292ae2f9dae5f29e11499c2d82ece');
+            xhr.open('GET', 'http://api.openweathermap.org/data/2.5/weather?id=' + config.cityCode + '&units=' + config.tempMetric + '&appid=e5b292ae2f9dae5f29e11499c2d82ece');
             xhr.onload = () => {
                 if (xhr.readyState === 4) {
                     if (xhr.status === 200) {
@@ -95,7 +132,7 @@
                         const unit = config.tempMetric == 'metric' ? 'C' : 'F'
                         console.log(unit);
 
-                        document.getElementById("temp").innerHTML = json.main.temp.toFixed(0) + " " +unit;
+                        document.getElementById("temp").innerHTML = json.main.temp.toFixed(0) + " " + unit;
                         document.getElementById("weather-description").innerHTML = json.weather[0].description;
                     } else {
                         console.log('error msg: ' + xhr.status);
@@ -106,9 +143,9 @@
             // Set up the clock
             document.getElementById("clock").innerHTML = getTime();
             // Set clock interval to tick clock
-            setInterval( () => {
+            setInterval(() => {
                 document.getElementById("clock").innerHTML = getTime();
-            },100);
+            }, 100);
         }
 
         document.addEventListener("keydown", event => {
@@ -123,4 +160,5 @@
         });
     </script>
 </body>
+
 </html>
